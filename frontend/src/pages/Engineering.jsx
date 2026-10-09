@@ -1,0 +1,124 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Wrench, Compass, CheckCircle2, MessageSquare, ArrowRight, Building2, Code, Cpu, Factory } from 'lucide-react';
+import Button from '../components/ui/Button';
+
+export const Engineering = () => {
+  const engineeringDisciplines = [
+    { icon: Cpu, title: 'Mechanical & Mechatronics', desc: 'Industrial machinery, robotics, and production system engineering.' },
+    { icon: Factory, title: 'Electrical & Automation', desc: 'PLC programming, power systems, and industrial automation engineering.' },
+    { icon: Code, title: 'IT & Software Engineering', desc: 'DevOps, cloud architecture, backend development, and embedded systems.' },
+    { icon: Wrench, title: 'Automotive & Quality Tech', desc: 'Vehicle component testing, CAD design, and DIN quality management.' }
+  ];
+
+  return (
+    <>
+      <Helmet>
+        <title>Engineering Opportunities in Germany | GlobalFly Consultancy</title>
+        <meta
+          name="description"
+          content="Explore engineering career pathways in Germany for Mechanical, Electrical, Mechatronics, Automotive, and IT Software Engineers under the EU Blue Card."
+        />
+      </Helmet>
+
+      {/* Hero */}
+      <div className="relative overflow-hidden bg-[#0F172A] text-white py-16 lg:py-24 border-b border-[#1E293B]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#2563EB]/20 px-4 py-2 rounded-full border border-[#2563EB]/40">
+            <Wrench className="w-4 h-4 text-[#2563EB]" /> Technology & Engineering
+          </span>
+          <h1 className="text-4xl sm:text-6xl font-black font-display tracking-tight text-white leading-tight">
+            Engineering Opportunities in <span className="text-[#F59E0B]">Germany</span>
+          </h1>
+          <p className="text-base sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed">
+            Connect with leading German manufacturing, industrial automation, and technology firms seeking qualified international engineers under the EU Blue Card framework.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <Link to="/candidate/register">
+              <Button variant="gold" size="lg" icon={ArrowRight}>
+                Register Engineering Profile
+              </Button>
+            </Link>
+            <Link to="/check-eligibility">
+              <Button variant="outline" size="lg" icon={Compass} className="text-white border-white/20 hover:bg-white/10">
+                Check Eligibility
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="py-16 bg-[#F8FAFC]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 text-left">
+          
+          {/* Disciplines Grid */}
+          <div className="bg-white rounded-3xl p-8 border border-[#E2E8F0] shadow-sm space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#0F172A]">
+              Key Engineering Disciplines in Demand
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {engineeringDisciplines.map((disc, i) => {
+                const IconComp = disc.icon;
+                return (
+                  <div key={i} className="p-6 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2">
+                    <div className="w-10 h-10 rounded-xl bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center mb-2">
+                      <IconComp className="w-5 h-5" />
+                    </div>
+                    <h4 className="text-base font-bold text-[#0F172A] font-display">{disc.title}</h4>
+                    <p className="text-xs text-[#64748B] leading-relaxed">{disc.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Candidate Skills & Requirements */}
+          <div className="bg-white rounded-3xl p-8 border border-[#E2E8F0] shadow-sm space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#0F172A]">
+              Candidate Qualifications & Skills
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
+                <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
+                <span>B.E / B.Tech / M.Tech in Engineering Discipline</span>
+              </div>
+              <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
+                <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
+                <span>Minimum 2 Years Professional Industry Experience</span>
+              </div>
+              <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
+                <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
+                <span>Fluent English (German A2/B1 is a strong advantage)</span>
+              </div>
+              <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
+                <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
+                <span>EU Blue Card Degree Recognition (Anabin Database)</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="bg-white rounded-3xl p-8 border border-[#E2E8F0] shadow-sm text-center space-y-4">
+            <h3 className="text-2xl font-bold font-display text-[#0F172A]">
+              Ready to Explore Engineering Roles in Germany?
+            </h3>
+            <p className="text-sm text-[#64748B] max-w-xl mx-auto">
+              Submit your engineering CV or get in touch with our recruitment consultants today.
+            </p>
+            <div className="pt-2 flex justify-center gap-4">
+              <Link to="/contact">
+                <Button variant="primary" size="lg" icon={MessageSquare}>
+                  Contact Our Consultants
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Engineering;

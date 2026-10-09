@@ -1,11 +1,12 @@
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Optional
 
 app = FastAPI(
-    title="GlobalFly Overseas Recruitment API",
+    title="GlobalFly Consultancy Pvt Ltd API",
     description="Backend API for GlobalFly overseas recruitment & consultancy platform focusing on Germany.",
-    version="1.0.0"
+    version="1.1.0"
 )
 
 # CORS Configuration
@@ -21,12 +22,92 @@ app.add_middleware(
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok", "service": "GlobalFly API", "version": "1.0.0"}
+    return {"status": "ok", "service": "GlobalFly Consultancy API", "version": "1.1.0"}
 
-# Mock endpoints for standalone backend execution
+# Jobs Endpoint (Retaining 3 Core Job Categories)
 @app.get("/api/jobs")
 async def get_jobs():
-    return {"status": "ok", "data": [], "message": "Jobs endpoint ready."}
+    jobs = [
+        {
+            "id": "nursing",
+            "title": "Nurse / Nursing Professional",
+            "category": "Healthcare",
+            "route": "/jobs/nursing",
+            "ctaText": "View Nursing Opportunities"
+        },
+        {
+            "id": "chef",
+            "title": "Professional Chef",
+            "category": "Chef & Kitchen",
+            "route": "/jobs/chef",
+            "ctaText": "View Chef Opportunities"
+        },
+        {
+            "id": "engineering",
+            "title": "Engineering Professional",
+            "category": "Engineering",
+            "route": "/jobs/engineering",
+            "ctaText": "View Engineering Opportunities"
+        }
+    ]
+    return {"status": "ok", "data": jobs, "count": len(jobs)}
+
+# Dedicated Nursing Application Endpoint
+@app.post("/api/nursing-applications")
+async def create_nursing_application(
+    fullName: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    currentCityCountry: str = Form(...),
+    qualification: str = Form(...),
+    graduationYear: str = Form(...),
+    workExperience: str = Form(...),
+    germanLevel: str = Form(...),
+    passportAvailability: str = Form(...),
+    contactMethod: Optional[str] = Form(None),
+    resume: Optional[UploadFile] = File(None)
+):
+    # Validate resume file extension if provided
+    if resume and resume.filename:
+        ext = resume.filename.split(".")[-1].lower()
+        if ext not in ["pdf", "doc", "docx"]:
+            raise HTTPException(status_code=400, detail="Invalid file type. Only PDF, DOC, and DOCX files are allowed.")
+    
+    return {
+        "status": "ok",
+        "success": True,
+        "message": "Your Nursing Application has been received successfully!"
+    }
+
+# Dedicated Chef Application Endpoint (NaviVisa inspired)
+@app.post("/api/chef-applications")
+async def create_chef_application(
+    fullName: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    currentLocation: str = Form(...),
+    currentJobTitle: str = Form(...),
+    cuisineSpecialisation: str = Form(...),
+    otherCuisine: Optional[str] = Form(None),
+    yearsOfExperience: str = Form(...),
+    qualification: str = Form(...),
+    germanLevel: str = Form(...),
+    englishLevel: str = Form(...),
+    preferredRole: Optional[str] = Form(None),
+    additionalMessage: Optional[str] = Form(None),
+    resume: Optional[UploadFile] = File(None)
+):
+    # Validate resume file extension if provided
+    if resume and resume.filename:
+        ext = resume.filename.split(".")[-1].lower()
+        if ext not in ["pdf", "doc", "docx"]:
+            raise HTTPException(status_code=400, detail="Invalid file type. Only PDF, DOC, and DOCX files are allowed.")
+    
+    return {
+        "status": "ok",
+        "success": True,
+        "message": "Your Chef Details have been sent successfully!"
+    }
 
 @app.post("/api/candidates")
 async def create_candidate():

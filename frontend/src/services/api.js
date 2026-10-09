@@ -34,9 +34,6 @@ export const getJobs = async (params = {}) => {
         const query = params.search.toLowerCase();
         filtered = filtered.filter(j => j.title.toLowerCase().includes(query) || j.category.toLowerCase().includes(query));
       }
-      if (params.experience && params.experience !== 'All') {
-        filtered = filtered.filter(j => j.experience === params.experience);
-      }
       return { data: filtered, count: filtered.length };
     }
   );
@@ -60,6 +57,28 @@ export const submitApplication = async (formData) => {
     }),
     async () => {
       return { success: true, message: 'Your application has been received successfully!' };
+    }
+  );
+};
+
+export const submitNursingApplication = async (formData) => {
+  return handleMockFallback(
+    () => apiClient.post('/nursing-applications', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }),
+    async () => {
+      return { success: true, message: 'Your Nursing Application has been received successfully!' };
+    }
+  );
+};
+
+export const submitChefApplication = async (formData) => {
+  return handleMockFallback(
+    () => apiClient.post('/chef-applications', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }),
+    async () => {
+      return { success: true, message: 'Your Chef Details have been sent successfully!' };
     }
   );
 };

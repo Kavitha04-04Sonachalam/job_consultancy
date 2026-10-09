@@ -1,29 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  HeartPulse,
-  UtensilsCrossed,
-  Truck,
-  Hotel,
-  Wrench,
-  Code,
-  Factory,
-  GraduationCap,
-  BookOpen,
-  ArrowRight
-} from 'lucide-react';
+import { HeartPulse, UtensilsCrossed, Wrench, ArrowRight } from 'lucide-react';
 import { categoriesData } from '../../data/categories';
 
 const iconMap = {
   HeartPulse,
   UtensilsCrossed,
-  Truck,
-  Hotel,
-  Wrench,
-  Code,
-  Factory,
-  GraduationCap,
-  BookOpen,
+  Wrench
 };
 
 export const Categories = () => {
@@ -33,31 +16,31 @@ export const Categories = () => {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto mb-12">
           <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#EFF6FF] px-3.5 py-1.5 rounded-full mb-3">
-            Recruitment Pathways
+            Primary Placement Domains
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] font-display tracking-tight">
-            Explore Germany Career Categories
+            Explore Core Germany Sectors
           </h2>
           <p className="mt-3 text-base text-[#64748B] leading-relaxed">
-            Tailored international placement programs spanning healthcare, culinary arts, logistics, technical trades, higher education, and vocational Ausbildung.
+            Specialized overseas recruitment programs for Nursing Professionals, Chefs & Culinary Specialists, and Engineering Professionals.
           </p>
         </div>
 
-        {/* 9 Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+        {/* 3 Domain Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           {categoriesData.map((cat) => {
-            const IconComponent = iconMap[cat.iconName] || BookOpen;
+            const IconComponent = iconMap[cat.iconName] || Wrench;
             return (
               <div
                 key={cat.id}
                 className="group relative bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Category Image Header */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-52 overflow-hidden">
                   <img
                     src={cat.image}
                     alt={cat.title}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-[#0F172A]/20 to-transparent" />
                   <span className="absolute top-3 right-3 text-[11px] font-bold text-white bg-[#0F172A]/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
@@ -80,10 +63,10 @@ export const Categories = () => {
                   </p>
                   
                   <Link
-                    to={`/jobs?category=${encodeURIComponent(cat.title)}`}
+                    to={cat.route}
                     className="inline-flex items-center gap-2 text-sm font-bold text-[#2563EB] group-hover:text-[#1D4ED8] transition-colors pt-2"
                   >
-                    <span>Explore Opportunities</span>
+                    <span>View Opportunities</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Briefcase, Clock, Languages, ArrowRight, ShieldCheck } from 'lucide-react';
+import { MapPin, Briefcase, Clock, Languages, ArrowRight } from 'lucide-react';
 import { jobsData } from '../../data/jobs';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 
-export const FeaturedJobs = ({ onApplyClick }) => {
+export const FeaturedJobs = () => {
   return (
     <section className="py-16 bg-white border-y border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,43 +13,43 @@ export const FeaturedJobs = ({ onApplyClick }) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#EFF6FF] px-3.5 py-1.5 rounded-full mb-3">
-              Verified Openings & Demos
+              Core Recruitment Sectors
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] font-display tracking-tight">
-              Featured Germany Vacancies
+              Featured Germany Pathways
             </h2>
             <p className="mt-2 text-base text-[#64748B] max-w-xl">
-              Sample job roles across Germany. Live positions change dynamically based on employer requirements.
+              Specialized Germany recruitment pathways for Nursing, Chef, and Engineering professionals.
             </p>
           </div>
           <Link to="/jobs" className="mt-4 md:mt-0">
             <Button variant="outline" size="md" icon={ArrowRight}>
-              View All Vacancies
+              View All Opportunities
             </Button>
           </Link>
         </div>
 
-        {/* Job Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 3 Job Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {jobsData.map((job) => (
             <div
               key={job.id}
-              className="bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] p-6 hover:shadow-xl hover:border-[#CBD5E1] transition-all duration-300 flex flex-col justify-between"
+              className="bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] p-6 hover:shadow-xl hover:border-[#2563EB]/40 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Header row */}
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <Badge variant={job.isDemo ? 'demo' : 'blue'}>
-                    {job.badgeText || 'Demo Opportunity'}
+                  <Badge variant="blue">
+                    {job.badgeText}
                   </Badge>
                   <span className="text-xs font-semibold text-[#2563EB] bg-[#EFF6FF] px-2.5 py-1 rounded-full flex items-center gap-1">
                     <MapPin className="w-3 h-3" /> {job.country}
                   </span>
                 </div>
 
-                {/* Job Title & Company */}
-                <h3 className="text-lg font-bold text-[#0F172A] font-display leading-snug hover:text-[#2563EB] transition-colors">
-                  <Link to={`/jobs/${job.slug}`}>{job.title}</Link>
+                {/* Job Title */}
+                <h3 className="text-xl font-bold text-[#0F172A] font-display leading-snug hover:text-[#2563EB] transition-colors">
+                  <Link to={job.route}>{job.title}</Link>
                 </h3>
                 <p className="text-xs font-medium text-[#64748B] mt-1 mb-4">
                   {job.company} • {job.location}
@@ -77,21 +77,13 @@ export const FeaturedJobs = ({ onApplyClick }) => {
                 </p>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex items-center gap-3 pt-2">
-                <Link to={`/jobs/${job.slug}`} className="flex-1">
-                  <Button variant="outline" size="sm" className="w-full justify-center">
-                    View Opportunity
+              {/* Action Button */}
+              <div className="pt-2">
+                <Link to={job.route} className="block w-full">
+                  <Button variant="primary" size="md" icon={ArrowRight} className="w-full justify-center">
+                    {job.ctaText}
                   </Button>
                 </Link>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => onApplyClick && onApplyClick(job)}
-                  className="flex-1 justify-center"
-                >
-                  Apply Now
-                </Button>
               </div>
             </div>
           ))}

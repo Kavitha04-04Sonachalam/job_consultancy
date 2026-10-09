@@ -7,6 +7,9 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Jobs from './pages/Jobs';
 import JobDetails from './pages/JobDetails';
+import Nursing from './pages/Nursing';
+import Chef from './pages/Chef';
+import Engineering from './pages/Engineering';
 import WorkInGermany from './pages/WorkInGermany';
 import StudyInGermany from './pages/StudyInGermany';
 import Ausbildung from './pages/Ausbildung';
@@ -31,6 +34,9 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs/nursing" element={<Nursing />} />
+            <Route path="/jobs/chef" element={<Chef />} />
+            <Route path="/jobs/engineering" element={<Engineering />} />
             <Route path="/jobs/:slug" element={<JobDetails />} />
             <Route path="/work-in-germany" element={<WorkInGermany />} />
             <Route path="/study-in-germany" element={<StudyInGermany />} />
