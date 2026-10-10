@@ -83,6 +83,17 @@ export const submitChefApplication = async (formData) => {
   );
 };
 
+export const submitEngineeringApplication = async (formData) => {
+  return handleMockFallback(
+    () => apiClient.post('/engineering-applications', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }),
+    async () => {
+      return { success: true, message: 'Your Engineering Enquiry has been received successfully!' };
+    }
+  );
+};
+
 export const registerCandidate = async (formData) => {
   return handleMockFallback(
     () => apiClient.post('/candidates', formData, {

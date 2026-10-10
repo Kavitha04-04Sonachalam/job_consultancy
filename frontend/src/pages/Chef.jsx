@@ -1,11 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { UtensilsCrossed, MessageSquare, CheckCircle2, ShieldAlert, ArrowRight, BookOpen, FileCheck2, UserCheck, Languages, Building2, Plane } from 'lucide-react';
 import Button from '../components/ui/Button';
 import ChefForm from '../components/forms/ChefForm';
 
 export const Chef = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, [location]);
   const processSteps = [
     { num: '01', title: 'Submit Your Details', desc: 'Fill out our culinary application form with your cuisine specializations and experience.' },
     { num: '02', title: 'Profile Review', desc: 'Our hospitality consultants evaluate your culinary credentials and kitchen history.' },

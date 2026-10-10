@@ -1,15 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Wrench, Compass, CheckCircle2, MessageSquare, ArrowRight, Building2, Code, Cpu, Factory } from 'lucide-react';
+import { Wrench, Compass, CheckCircle2, MessageSquare, ArrowRight, Cpu, Factory, Code, ShieldCheck } from 'lucide-react';
 import Button from '../components/ui/Button';
+import EngineeringForm from '../components/forms/EngineeringForm';
 
 export const Engineering = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, [location]);
+
   const engineeringDisciplines = [
-    { icon: Cpu, title: 'Mechanical & Mechatronics', desc: 'Industrial machinery, robotics, and production system engineering.' },
-    { icon: Factory, title: 'Electrical & Automation', desc: 'PLC programming, power systems, and industrial automation engineering.' },
-    { icon: Code, title: 'IT & Software Engineering', desc: 'DevOps, cloud architecture, backend development, and embedded systems.' },
-    { icon: Wrench, title: 'Automotive & Quality Tech', desc: 'Vehicle component testing, CAD design, and DIN quality management.' }
+    { icon: Cpu, title: 'Mechanical & Mechatronics', desc: 'Industrial machinery, robotics, automation systems, and CAD design engineering.' },
+    { icon: Factory, title: 'Electrical & Automation', desc: 'PLC programming, power grid systems, and manufacturing plant automation.' },
+    { icon: Code, title: 'IT & Software Engineering', desc: 'DevOps, cloud architecture, backend systems, and embedded firmware engineering.' },
+    { icon: Wrench, title: 'Automotive & Quality Tech', desc: 'Vehicle component testing, QA management, and DIN standard compliance.' }
   ];
 
   return (
@@ -35,11 +50,11 @@ export const Engineering = () => {
             Connect with leading German manufacturing, industrial automation, and technology firms seeking qualified international engineers under the EU Blue Card framework.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Link to="/candidate/register">
+            <a href="#engineering-form">
               <Button variant="gold" size="lg" icon={ArrowRight}>
-                Register Engineering Profile
+                Apply for Engineering Opportunities
               </Button>
-            </Link>
+            </a>
             <Link to="/check-eligibility">
               <Button variant="outline" size="lg" icon={Compass} className="text-white border-white/20 hover:bg-white/10">
                 Check Eligibility
@@ -81,7 +96,7 @@ export const Engineering = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
                 <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
-                <span>B.E / B.Tech / M.Tech in Engineering Discipline</span>
+                <span>B.E / B.Tech / M.Tech in an Accredited Engineering Discipline</span>
               </div>
               <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
                 <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
@@ -93,26 +108,20 @@ export const Engineering = () => {
               </div>
               <div className="flex items-start gap-3 text-sm text-[#0F172A] font-semibold">
                 <CheckCircle2 className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
-                <span>EU Blue Card Degree Recognition (Anabin Database)</span>
+                <span>EU Blue Card Degree Recognition (Anabin Database Verification)</span>
               </div>
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="bg-white rounded-3xl p-8 border border-[#E2E8F0] shadow-sm text-center space-y-4">
-            <h3 className="text-2xl font-bold font-display text-[#0F172A]">
-              Ready to Explore Engineering Roles in Germany?
-            </h3>
-            <p className="text-sm text-[#64748B] max-w-xl mx-auto">
-              Submit your engineering CV or get in touch with our recruitment consultants today.
+          {/* Engineering Application Form */}
+          <div id="engineering-form" className="bg-white rounded-3xl p-8 border border-[#E2E8F0] shadow-sm space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-[#0F172A]">
+              Submit Engineering Enquiry
+            </h2>
+            <p className="text-xs text-[#64748B]">
+              Fill out the form below. Our technical recruitment consultants will evaluate your profile against current German industrial vacancies.
             </p>
-            <div className="pt-2 flex justify-center gap-4">
-              <Link to="/contact">
-                <Button variant="primary" size="lg" icon={MessageSquare}>
-                  Contact Our Consultants
-                </Button>
-              </Link>
-            </div>
+            <EngineeringForm />
           </div>
 
         </div>

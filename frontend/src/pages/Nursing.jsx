@@ -1,11 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { HeartPulse, Compass, CheckCircle2, ShieldAlert, ArrowRight, BookOpen, FileCheck2, UserCheck, Languages, Building2, Plane } from 'lucide-react';
 import Button from '../components/ui/Button';
 import NursingForm from '../components/forms/NursingForm';
 
 export const Nursing = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, [location]);
   const processSteps = [
     { num: '01', title: 'Submit Your Profile', desc: 'Fill out our nursing application form with your qualifications and experience details.' },
     { num: '02', title: 'Initial Profile Assessment', desc: 'Our consultants review your nursing degree, clinical experience, and target timeline.' },

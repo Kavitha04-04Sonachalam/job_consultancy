@@ -1,93 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Hero from '../components/home/Hero';
-import SearchSection from '../components/home/SearchSection';
-import Categories from '../components/home/Categories';
-import FeaturedJobs from '../components/home/FeaturedJobs';
-import AboutSection from '../components/home/AboutSection';
-import Services from '../components/home/Services';
-import WhyChooseUs from '../components/home/WhyChooseUs';
-import HowItWorks from '../components/home/HowItWorks';
-import GermanySection from '../components/home/GermanySection';
-import StudySection from '../components/home/StudySection';
-import LanguageSection from '../components/home/LanguageSection';
-import EmployerSection from '../components/home/EmployerSection';
-import Testimonials from '../components/home/Testimonials';
-import FAQ from '../components/home/FAQ';
-import FinalCTA from '../components/home/FinalCTA';
-import ApplyModal from '../components/jobs/ApplyModal';
+import { MessageSquare } from 'lucide-react';
+import JobAdvertisements from '../components/home/JobAdvertisements';
+import CurrentOpeningsBanner from '../components/home/CurrentOpeningsBanner';
+import OpportunitySelector from '../components/home/OpportunitySelector';
+import ContactForm from '../components/forms/ContactForm';
+import AboutNaviVisaSection from '../components/home/AboutNaviVisaSection';
+import GermanStandardsSection from '../components/home/GermanStandardsSection';
 
 export const Home = () => {
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-
-  const handleApplyClick = (job) => {
-    setSelectedJob(job);
-    setIsApplyModalOpen(true);
-  };
-
   return (
     <>
       <Helmet>
-        <title>GlobalFly | Build Your Career in Germany</title>
+        <title>GLOBALFLY | Germany Overseas Recruitment & Career Consultancy</title>
         <meta
           name="description"
-          content="Explore jobs in Germany, nursing recruitment, professional chef opportunities, heavy driving, study programs, and Ausbildung training with GlobalFly."
+          content="Explore simplified career pathways to Germany for Nursing, Chef, and Engineering professionals with GLOBALFLY Consultancy Pvt Ltd."
         />
       </Helmet>
 
       <main className="min-h-screen">
-        {/* 1. Hero */}
-        <Hero />
+        {/* 1. Header is rendered in App.jsx layout with Instagram icon */}
 
-        {/* 2. Quick Search */}
-        <SearchSection />
+        {/* 2. Three Job Advertisements: Nursing, Chef, Other Opportunities */}
+        <JobAdvertisements />
 
-        {/* 3. Career Categories */}
-        <Categories />
+        {/* 3. Current Job Openings banner — clean intentional empty state */}
+        <CurrentOpeningsBanner />
 
-        {/* 4. Featured Jobs */}
-        <FeaturedJobs onApplyClick={handleApplyClick} />
+        {/* 4. Opportunity dropdown leading to the relevant contact form */}
+        <OpportunitySelector />
 
-        {/* 5. About GlobalFly */}
-        <AboutSection />
+        {/* 5. General Contact GLOBALFLY form */}
+        <section id="general-contact" className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+            <div className="space-y-3">
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#EFF6FF] px-3.5 py-1.5 rounded-full">
+                <MessageSquare className="w-3.5 h-3.5" />
+                Direct Inquiry
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black font-display text-[#0F172A] tracking-tight">
+                Contact GLOBALFLY
+              </h2>
+              <p className="text-base text-[#64748B] max-w-xl mx-auto leading-relaxed">
+                Have a question? Tell us how we can help, and our team will get back to you.
+              </p>
+            </div>
 
-        {/* 6. Services */}
-        <Services />
+            <div className="bg-[#F8FAFC] rounded-3xl border border-[#E2E8F0] p-6 sm:p-10 shadow-sm text-left">
+              <ContactForm />
+            </div>
+          </div>
+        </section>
 
-        {/* 7. Why Choose Us */}
-        <WhyChooseUs />
+        {/* 6. About GLOBALFLY section inspired by NaviVisa */}
+        <AboutNaviVisaSection />
 
-        {/* 8. How It Works */}
-        <HowItWorks />
+        {/* 7. German standards and recruitment guidance */}
+        <GermanStandardsSection />
 
-        {/* 9. Work in Germany */}
-        <GermanySection />
-
-        {/* 10. Study & Ausbildung */}
-        <StudySection />
-
-        {/* 11. German Language */}
-        <LanguageSection />
-
-        {/* 12. Employer Section */}
-        <EmployerSection />
-
-        {/* 13. Testimonials */}
-        <Testimonials />
-
-        {/* 14. FAQ */}
-        <FAQ />
-
-        {/* 15. Final CTA */}
-        <FinalCTA />
-
-        {/* Application Modal */}
-        <ApplyModal
-          isOpen={isApplyModalOpen}
-          onClose={() => setIsApplyModalOpen(false)}
-          job={selectedJob}
-        />
+        {/* 8. Existing footer is rendered in App.jsx layout */}
       </main>
     </>
   );

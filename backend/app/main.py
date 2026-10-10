@@ -1,12 +1,12 @@
 import os
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 
 app = FastAPI(
     title="GlobalFly Consultancy Pvt Ltd API",
     description="Backend API for GlobalFly overseas recruitment & consultancy platform focusing on Germany.",
-    version="1.1.0"
+    version="1.2.0"
 )
 
 # CORS Configuration
@@ -22,7 +22,7 @@ app.add_middleware(
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok", "service": "GlobalFly Consultancy API", "version": "1.1.0"}
+    return {"status": "ok", "service": "GlobalFly Consultancy API", "version": "1.2.0"}
 
 # Jobs Endpoint (Retaining 3 Core Job Categories)
 @app.get("/api/jobs")
@@ -52,23 +52,28 @@ async def get_jobs():
     ]
     return {"status": "ok", "data": jobs, "count": len(jobs)}
 
-# Dedicated Nursing Application Endpoint
+# Dedicated Nursing Application & Enquiry Endpoint (Leverage Edu Inspired)
 @app.post("/api/nursing-applications")
 async def create_nursing_application(
     fullName: str = Form(...),
     email: str = Form(...),
     phone: str = Form(...),
-    currentCityCountry: str = Form(...),
     qualification: str = Form(...),
-    graduationYear: str = Form(...),
-    workExperience: str = Form(...),
-    germanLevel: str = Form(...),
-    passportAvailability: str = Form(...),
+    currentLocation: Optional[str] = Form(None),
+    currentCityCountry: Optional[str] = Form(None),
+    graduationYear: Optional[str] = Form(None),
+    workExperience: Optional[str] = Form(None),
+    yearsOfExperience: Optional[str] = Form(None),
+    germanLevel: Optional[str] = Form(None),
+    passportAvailability: Optional[str] = Form(None),
     contactMethod: Optional[str] = Form(None),
+    message: Optional[str] = Form(None),
+    enquiry: Optional[str] = Form(None),
+    consent: Optional[bool] = Form(None),
     resume: Optional[UploadFile] = File(None)
 ):
     # Validate resume file extension if provided
-    if resume and resume.filename:
+    if resume and hasattr(resume, "filename") and resume.filename:
         ext = resume.filename.split(".")[-1].lower()
         if ext not in ["pdf", "doc", "docx"]:
             raise HTTPException(status_code=400, detail="Invalid file type. Only PDF, DOC, and DOCX files are allowed.")
@@ -76,7 +81,7 @@ async def create_nursing_application(
     return {
         "status": "ok",
         "success": True,
-        "message": "Your Nursing Application has been received successfully!"
+        "message": "Your Nursing Enquiry has been received successfully! Our Germany healthcare advisory team will contact you soon."
     }
 
 # Dedicated Chef Application Endpoint (NaviVisa inspired)
@@ -98,7 +103,7 @@ async def create_chef_application(
     resume: Optional[UploadFile] = File(None)
 ):
     # Validate resume file extension if provided
-    if resume and resume.filename:
+    if resume and hasattr(resume, "filename") and resume.filename:
         ext = resume.filename.split(".")[-1].lower()
         if ext not in ["pdf", "doc", "docx"]:
             raise HTTPException(status_code=400, detail="Invalid file type. Only PDF, DOC, and DOCX files are allowed.")
@@ -107,6 +112,33 @@ async def create_chef_application(
         "status": "ok",
         "success": True,
         "message": "Your Chef Details have been sent successfully!"
+    }
+
+# Dedicated Engineering Application & Enquiry Endpoint
+@app.post("/api/engineering-applications")
+async def create_engineering_application(
+    fullName: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    currentLocation: str = Form(...),
+    discipline: str = Form(...),
+    qualification: str = Form(...),
+    experience: str = Form(...),
+    germanLevel: str = Form(...),
+    message: Optional[str] = Form(None),
+    consent: Optional[bool] = Form(None),
+    resume: Optional[UploadFile] = File(None)
+):
+    # Validate resume file extension if provided
+    if resume and hasattr(resume, "filename") and resume.filename:
+        ext = resume.filename.split(".")[-1].lower()
+        if ext not in ["pdf", "doc", "docx"]:
+            raise HTTPException(status_code=400, detail="Invalid file type. Only PDF, DOC, and DOCX files are allowed.")
+    
+    return {
+        "status": "ok",
+        "success": True,
+        "message": "Your Engineering Enquiry has been received successfully! Our technical team will review your profile."
     }
 
 @app.post("/api/candidates")
@@ -126,8 +158,18 @@ async def create_employer_enquiry():
     return {"status": "ok", "success": True, "message": "Employer hiring request submitted successfully!"}
 
 @app.post("/api/contact")
-async def create_contact():
-    return {"status": "ok", "success": True, "message": "Thank you for reaching out. We will get back to you shortly!"}
+async def create_contact(request: Request):
+    # Accepts JSON or form data payload safely
+    try:
+        data = await request.json()
+    except Exception:
+        data = {}
+    
+    return {
+        "status": "ok",
+        "success": True,
+        "message": "Thank you for reaching out to GLOBALFLY. Our consultancy team will get back to you shortly!"
+    }
 
 if __name__ == "__main__":
     import uvicorn

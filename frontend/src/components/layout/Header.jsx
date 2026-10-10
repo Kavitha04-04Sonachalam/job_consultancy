@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, MessageSquare, Compass, PhoneCall } from 'lucide-react';
+import { Menu, X, ArrowRight, MessageSquare, Compass } from 'lucide-react';
 import Button from '../ui/Button';
+import InstagramIcon from '../ui/InstagramIcon';
+import siteConfig from '../../config/site';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,13 +80,25 @@ export const Header = () => {
 
           {/* Right CTAs */}
           <div className="hidden lg:flex items-center gap-3">
+            {/* Instagram Profile Icon */}
+            <a
+              href={siteConfig.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit GLOBALFLY on Instagram"
+              className="p-2 rounded-xl text-[#CBD5E1] hover:text-white hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] transition-all duration-300 border border-white/10 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-[#DD2A7B]"
+              title="Follow GLOBALFLY on Instagram"
+            >
+              <InstagramIcon className="w-5 h-5" />
+            </a>
+
             <Link to="/check-eligibility">
               <Button variant="gold" size="sm" icon={Compass}>
                 Check Eligibility
               </Button>
             </Link>
             <a
-              href="https://wa.me/919000000000?text=Hello%20GlobalFly%2C%20I%20am%20interested%20in%20Germany%20career%20and%20study%20opportunities."
+              href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -94,11 +108,23 @@ export const Header = () => {
             </a>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Actions */}
           <div className="flex items-center gap-2 lg:hidden">
+            {/* Mobile Instagram Icon */}
+            <a
+              href={siteConfig.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit GLOBALFLY on Instagram"
+              className="p-2 rounded-xl text-[#CBD5E1] hover:text-white hover:bg-white/10 transition-colors"
+              title="Follow GLOBALFLY on Instagram"
+            >
+              <InstagramIcon className="w-5 h-5" />
+            </a>
+
             <Link to="/check-eligibility" className="sm:hidden">
               <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-[#F59E0B] text-[#0F172A]">
-                Check Eligibility
+                Eligibility
               </span>
             </Link>
             <button
@@ -133,13 +159,22 @@ export const Header = () => {
               );
             })}
             <div className="pt-4 border-t border-[#1E293B] flex flex-col gap-3">
+              <a
+                href={siteConfig.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-white/10 text-white hover:bg-white/5 text-sm font-semibold transition-colors"
+              >
+                <InstagramIcon className="w-4 h-4 text-[#F59E0B]" />
+                Follow Us on Instagram
+              </a>
               <Link to="/check-eligibility" className="w-full">
                 <Button variant="gold" size="md" className="w-full justify-center">
                   Check Your Eligibility
                 </Button>
               </Link>
               <a
-                href="https://wa.me/919000000000?text=Hello%20GlobalFly%2C%20I%20am%20interested%20in%20Germany%20opportunities."
+                href={siteConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full"
