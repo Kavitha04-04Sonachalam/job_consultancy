@@ -26,50 +26,52 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white pt-20 pb-12 border-t border-[#1E293B] relative">
+    <footer className="bg-[#0F172A] text-white pt-16 pb-12 border-t border-[#1E293B] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Three Columns: ABOUT US | QUICK LINKS | FOLLOW US (NaviVisa Screenshot Inspired) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 pb-16 border-b border-[#1E293B] text-left">
+        {/* Three Columns: ABOUT US | QUICK LINKS | FOLLOW US */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 pb-14 border-b border-[#1E293B] text-left">
           
           {/* Column 1: ABOUT US */}
-          <div className="space-y-5">
-            <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white font-display">
+          <div className="space-y-4">
+            <h3 className="text-lg sm:text-xl font-black tracking-wider uppercase text-white font-display flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
               ABOUT US
             </h3>
-            <p className="text-sm sm:text-base font-medium text-[#EA580C] sm:text-[#F59E0B] leading-relaxed max-w-sm">
+            <p className="text-sm font-normal text-[#94A3B8] leading-relaxed max-w-sm">
               We are an overseas recruitment & career consultancy bridging ambitious candidates and students with verified employers across Germany. We guide qualified candidates in nursing, culinary arts, and engineering to realize their professional careers in Germany with full regulatory compliance.
             </p>
           </div>
 
           {/* Column 2: QUICK LINKS */}
-          <div className="space-y-5 md:pl-8">
-            <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white font-display">
+          <div className="space-y-4 md:pl-8">
+            <h3 className="text-lg sm:text-xl font-black tracking-wider uppercase text-white font-display flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
               QUICK LINKS
             </h3>
-            <ul className="space-y-3 text-sm sm:text-base font-semibold text-[#EA580C] sm:text-[#F59E0B]">
+            <ul className="space-y-2.5 text-sm font-medium text-[#CBD5E1]">
               <li>
-                <Link to="/about" className="hover:text-white transition-colors">
+                <Link to="/about" className="hover:text-[#F59E0B] transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition-colors">
+                <Link to="/contact" className="hover:text-[#F59E0B] transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link to="/jobs" className="hover:text-white transition-colors">
+                <Link to="/jobs" className="hover:text-[#F59E0B] transition-colors">
                   Looking for Job?
                 </Link>
               </li>
               <li>
-                <Link to="/employer" className="hover:text-white transition-colors">
+                <Link to="/employer" className="hover:text-[#F59E0B] transition-colors">
                   Looking for Employees?
                 </Link>
               </li>
               <li>
-                <Link to="/check-eligibility" className="hover:text-white transition-colors">
+                <Link to="/check-eligibility" className="hover:text-[#F59E0B] transition-colors">
                   Check Eligibility
                 </Link>
               </li>
@@ -77,33 +79,34 @@ export const Footer = () => {
           </div>
 
           {/* Column 3: FOLLOW US */}
-          <div className="space-y-5 md:pl-8">
-            <h3 className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white font-display">
+          <div className="space-y-4 md:pl-8">
+            <h3 className="text-lg sm:text-xl font-black tracking-wider uppercase text-white font-display flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#F59E0B]" />
               FOLLOW US
             </h3>
-            <div className="flex items-center gap-5 pt-1 text-[#EA580C] sm:text-[#F59E0B]">
+            <div className="flex items-center gap-4 pt-1 text-[#CBD5E1]">
               <a
                 href={siteConfig.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow GLOBALFLY on Facebook"
-                className="hover:text-white transition-colors"
+                className="p-2 rounded-xl bg-[#1E293B] hover:bg-[#2563EB] hover:text-white transition-all shadow-sm"
                 title="Facebook"
               >
-                <FacebookIcon className="w-6 h-6" />
+                <FacebookIcon className="w-5 h-5" />
               </a>
               <a
                 href={siteConfig.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow GLOBALFLY on Instagram"
-                className="hover:text-white transition-colors"
+                className="p-2 rounded-xl bg-[#1E293B] hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white transition-all shadow-sm"
                 title="Instagram"
               >
-                <InstagramIcon className="w-6 h-6" />
+                <InstagramIcon className="w-5 h-5" />
               </a>
             </div>
-            <p className="text-xs text-[#94A3B8] pt-2">
+            <p className="text-xs text-[#94A3B8] pt-1">
               Stay connected with verified Germany vacancy notices and candidate roadmaps.
             </p>
           </div>
@@ -111,7 +114,7 @@ export const Footer = () => {
         </div>
 
         {/* Legal Disclaimer Notice */}
-        <div className="mt-10 p-5 rounded-2xl bg-[#0F172A] border border-[#1E293B] flex gap-3.5 items-start text-xs text-[#94A3B8] text-left">
+        <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-[#1E293B]/60 border border-[#334155] flex gap-3.5 items-start text-xs text-[#94A3B8] text-left">
           <ShieldAlert className="w-5 h-5 text-[#F59E0B] shrink-0 mt-0.5" />
           <p className="leading-relaxed">
             <strong className="text-white">Statutory Regulatory Notice:</strong> GLOBALFLY Consultancy Pvt Ltd provides overseas career advisory, document assistance, and candidate representation. Official visa, immigration, and professional recognition decisions rest solely with statutory German authorities (BAMF, ZAB, regional health and commerce boards). We do not guarantee visa issuance or automatic placement outcomes.
@@ -131,13 +134,13 @@ export const Footer = () => {
 
       </div>
 
-      {/* Floating Scroll-to-Top Button (Screenshot Feature) */}
+      {/* Floating Scroll-to-Top Button */}
       {showScrollTop && (
         <button
           type="button"
           onClick={scrollToTop}
           aria-label="Scroll back to top"
-          className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-[#6366F1] hover:bg-[#4F46E5] text-white flex items-center justify-center shadow-2xl transition-all duration-300 z-50 hover:scale-110 active:scale-95 animate-fadeIn"
+          className="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white flex items-center justify-center shadow-2xl transition-all duration-300 z-50 hover:scale-110 active:scale-95 animate-fadeIn"
           title="Back to Top"
         >
           <ArrowUp className="w-5 h-5 stroke-[2.5]" />
