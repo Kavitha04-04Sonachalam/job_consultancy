@@ -20,6 +20,7 @@ export const Button = ({
     outline: 'border border-[#CBD5E1] bg-white text-[#0F172A] hover:bg-[#F8FAFC] hover:border-[#2563EB] focus:ring-[#2563EB]',
     ghost: 'text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0F172A]',
     whatsapp: 'bg-[#25D366] text-white hover:bg-[#20bd5a] focus:ring-[#25D366] shadow-sm',
+    instagram: 'bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white hover:opacity-95 focus:ring-[#DD2A7B] shadow-sm',
   };
 
   const sizes = {
