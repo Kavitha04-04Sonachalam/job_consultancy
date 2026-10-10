@@ -53,11 +53,11 @@ export const Home = () => {
           </div>
         </section>
 
-        {/* 6. About GLOBALFLY section inspired by NaviVisa */}
-        <AboutNaviVisaSection />
-
-        {/* 7. German standards and recruitment guidance */}
+        {/* 6. German standards and recruitment guidance */}
         <GermanStandardsSection />
+
+        {/* 7. About GLOBALFLY section inspired by NaviVisa (Directly before footer as in screenshot) */}
+        <AboutNaviVisaSection />
 
         {/* 8. Existing footer is rendered in App.jsx layout */}
       </main>
