@@ -8,10 +8,11 @@ const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 5000,
+  timeout: 15000, // Increased from 5s → 15s to avoid spurious timeouts
 });
 
-// Helper for offline / dev mock fallback
+// ── Read-only helpers (mock fallback is safe — no data is lost) ───────────────
+
 const handleMockFallback = async (apiCall, mockFn) => {
   try {
     const response = await apiCall();
@@ -50,86 +51,58 @@ export const getJobBySlug = async (slug) => {
   );
 };
 
-export const submitApplication = async (formData) => {
-  return handleMockFallback(
-    () => apiClient.post('/applications', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
-    async () => {
-      return { success: true, message: 'Your application has been received successfully!' };
-    }
-  );
-};
+// ── Form submission helpers (NO silent mock — errors must surface to the user) ─
+// These functions throw on failure so NursingForm/ChefForm/etc. can show the
+// real error message instead of pretending the submission succeeded.
 
 export const submitNursingApplication = async (formData) => {
-  return handleMockFallback(
-    () => apiClient.post('/nursing-applications', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
-    async () => {
-      return { success: true, message: 'Your Nursing Application has been received successfully!' };
-    }
-  );
+  const response = await apiClient.post('/nursing-applications', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
 };
 
 export const submitChefApplication = async (formData) => {
-  return handleMockFallback(
-    () => apiClient.post('/chef-applications', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
-    async () => {
-      return { success: true, message: 'Your Chef Details have been sent successfully!' };
-    }
-  );
+  const response = await apiClient.post('/chef-applications', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
 };
 
 export const submitEngineeringApplication = async (formData) => {
-  return handleMockFallback(
-    () => apiClient.post('/engineering-applications', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
-    async () => {
-      return { success: true, message: 'Your Engineering Enquiry has been received successfully!' };
-    }
-  );
-};
-
-export const registerCandidate = async (formData) => {
-  return handleMockFallback(
-    () => apiClient.post('/candidates', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
-    async () => {
-      return { success: true, message: 'Candidate registration submitted successfully!' };
-    }
-  );
-};
-
-export const submitEligibility = async (data) => {
-  return handleMockFallback(
-    () => apiClient.post('/eligibility', data),
-    async () => {
-      return { success: true, message: 'Your information has been submitted for an eligibility assessment.' };
-    }
-  );
-};
-
-export const submitEmployerEnquiry = async (data) => {
-  return handleMockFallback(
-    () => apiClient.post('/employer-enquiries', data),
-    async () => {
-      return { success: true, message: 'Employer hiring request submitted successfully!' };
-    }
-  );
+  const response = await apiClient.post('/engineering-applications', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
 };
 
 export const submitContact = async (data) => {
-  return handleMockFallback(
-    () => apiClient.post('/contact', data),
-    async () => {
-      return { success: true, message: 'Thank you for reaching out. We will get back to you shortly!' };
-    }
-  );
+  const response = await apiClient.post('/contact', data);
+  return response.data;
+};
+
+export const submitApplication = async (formData) => {
+  const response = await apiClient.post('/applications', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
+};
+
+export const registerCandidate = async (formData) => {
+  const response = await apiClient.post('/candidates', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
+};
+
+export const submitEligibility = async (data) => {
+  const response = await apiClient.post('/eligibility', data);
+  return response.data;
+};
+
+export const submitEmployerEnquiry = async (data) => {
+  const response = await apiClient.post('/employer-enquiries', data);
+  return response.data;
 };
 
 export default apiClient;
